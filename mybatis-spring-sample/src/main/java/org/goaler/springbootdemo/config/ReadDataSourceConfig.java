@@ -25,6 +25,12 @@ public class ReadDataSourceConfig {
         return new DruidDataSource();
     }
 
+    /**
+     *
+     * @param readDataSource
+     * @return
+     * @throws Exception
+     */
     @Bean
     public SqlSessionFactory readSqlSessionFactory(@Qualifier("readDataSource") DataSource readDataSource) throws Exception {
         SqlSessionFactoryBean ssfb = new SqlSessionFactoryBean();
@@ -40,6 +46,12 @@ public class ReadDataSourceConfig {
         return sst;
     }
 
+    /**
+     * 扫描包下所有接口，注册BeanDefinition,指定beanClass为MapperFactoryBean.class
+     * 自动注入的时候就会通过FactoryBean注入代理对象了
+     *
+     * @return
+     */
     @Bean
     public MapperScannerConfigurer readMapperScannerConfigurer() {
         MapperScannerConfigurer msc = new MapperScannerConfigurer();
